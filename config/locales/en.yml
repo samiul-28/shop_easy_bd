@@ -27,5 +27,14 @@
 #       "yes": yup
 #       enabled: "ON"
 
+
 en:
-  hello: "Hello world"
+  navbar:
+    home: "Home"
+    products: "Products"
+    categories: "Categories"
+    cart: "Cart"
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    logout: "Logout"
+    profile: "My Profile"

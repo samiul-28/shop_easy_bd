@@ -1,0 +1,10 @@
+bn:
+  navbar:
+    home: "হোম"
+    products: "পণ্যসমূহ"
+    categories: "বিভাগ"
+    cart: "কার্ট"
+    sign_in: "লগইন"
+    sign_up: "নিবন্ধন"
+    logout: "লগআউট"
+    profile: "আমার প্রোফাইল"

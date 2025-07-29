@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to "ShopEasyBD", root_path, class: "navbar-brand" %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to t('navbar.home'), root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.products'), products_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.categories'), categories_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.cart'), "#", class: "nav-link" %> <!-- Replace # with cart_path if you build cart -->
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to t('navbar.profile'), edit_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to t('navbar.sign_in'), new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t('navbar.sign_up'), new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+
+        <!-- Language switcher -->
+        <li class="nav-item">
+          <%= link_to "🇬🇧", url_for(locale: 'en'), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "🇧🇩", url_for(locale: 'bn'), class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
