@@ -4,22 +4,44 @@
   <%= link_to t('products.index.new_product'), new_product_path, class: "btn btn-primary" %>
 </div>
 
+<!-- Filter form: Automatically submits when a category is selected -->
+<div class="mb-3">
+  <%= form_with url: products_path, method: :get, local: true, id: "product-filter-form" do %>
+    <div class="row g-2">
+      <div class="col-md-4">
+        <%= select_tag :category_id,
+          options_from_collection_for_select(Category.all, :id, :name_en, @category_id),
+          include_blank: "All Categories",
+          class: "form-select",
+          onchange: "this.form.submit();" # JavaScript to auto-submit the form on change
+        %>
+      </div>
+      <% # The submit button has been removed as the form submits automatically %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Product list display -->
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-3 mb-4">
-      <div class="card">
+      <% # Wrap the entire card in an anchor tag to make the whole card clickable %>
+      <%= link_to product_path(product), class: "card h-100 text-decoration-none text-dark" do %>
         <% if product.image.attached? %>
           <%= image_tag product.image, class: "card-img-top", style: "height:200px; object-fit:cover;" %>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= I18n.locale == :bn ? product.name_bn : product.name_en %></h5>
+          <h5 class="card-title text-truncate">
+            <%= I18n.locale == :bn ? product.name_bn : product.name_en %>
+          </h5>
           <p class="card-text">৳ <%= product.price %></p>
-          <%= link_to t('products.index.details'), product_path(product), class: "btn btn-sm btn-outline-primary" %>
+          <% # The individual 'Details' button is no longer needed since the entire card is a link %>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>
+
 <% if @products.empty? %>
   <div class="alert alert-info">
     <%= t('products.index.no_products') %>

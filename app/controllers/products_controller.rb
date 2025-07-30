@@ -2,11 +2,24 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.includes(:category, image_attachment: :blob).all.order(created_at: :desc)
+    @query = params[:q]
+    @category_id = params[:category_id]
+
+    @products = Product.all
+
+    # Filter by search
+    if @query.present?
+      @products = @products.where("name_en ILIKE :search OR name_bn ILIKE :search", search: "%#{@query}%")
+    end
+
+    # Filter by category
+    if @category_id.present?
+      @products = @products.where(category_id: @category_id)
+    end
+
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
@@ -21,8 +34,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
