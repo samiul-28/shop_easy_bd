@@ -1,0 +1,44 @@
+<%= form_with(model: product, local: true) do |f| %>
+    <div class="mb-3">
+      <%= f.label :name_en, t('products.form.name_en') %>
+      <%= f.text_field :name_en, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :name_bn, t('products.form.name_bn') %>
+      <%= f.text_field :name_bn, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :description_en, t('products.form.description_en') %>
+      <%= f.text_area :description_en, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :description_bn, t('products.form.description_bn') %>
+      <%= f.text_area :description_bn, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :price, t('products.form.price') %>
+      <%= f.number_field :price, step: 0.01, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :stock, t('products.form.stock') %>
+      <%= f.number_field :stock, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :category_id, t('products.form.category') %>
+      <%= f.collection_select :category_id, Category.all, :id, :name_en, prompt: t('products.form.select_category'), class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :image, t('products.form.image') %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+  
+    <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>
+  

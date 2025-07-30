@@ -1,0 +1,21 @@
+<h1><%= I18n.locale == :bn ? @category.name_bn : @category.name_en %></h1>
+<h2><%= t('categories.show.title') %></h2>
+
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-md-3 mb-4">
+      <div class="card">
+        <% if product.image.attached? %>
+          <%= image_tag product.image, class: "card-img-top", style: "height:200px;object-fit:cover;" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= I18n.locale == :bn ? product.name_bn : product.name_en %></h5>
+          <p class="card-text">৳ <%= product.price %></p>
+          <%= link_to t('products.index.details'), product_path(product), class: "btn btn-sm btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to t('products.show.back'), categories_path, class: "btn btn-secondary" %>

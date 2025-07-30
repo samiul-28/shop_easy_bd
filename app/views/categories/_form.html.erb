@@ -1,0 +1,16 @@
+<%= form_with(model: category, local: true) do |f| %>
+    <div class="mb-3">
+      <%= f.label :name_en, t('categories.form.name_en') %>
+      <%= f.text_field :name_en, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :name_bn, t('categories.form.name_bn') %>
+      <%= f.text_field :name_bn, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :parent_id, t('categories.form.parent') %>
+      <%= f.collection_select :parent_id, Category.all, :id, (I18n.locale == :bn ? :name_bn : :name_en), prompt: t('categories.form.select_parent'), class: "form-control" %>
+    </div>
+    <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>
+  

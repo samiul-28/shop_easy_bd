@@ -7,18 +7,18 @@ For running any Rails command like `rails c` prepend the command with `docker co
 
 Examples:d
 ```
-docker compose run citcom rails c
+docker compose run app_name rails c
 ```
 ```
-docker compose run citcom bin/rails db:migrate
+docker compose run app_name bin/rails db:migrate
 ```
 
-{sudo docker compose run citcom bundle exec rails db:migrate
-sudo docker compose run citcom bundle exec rails c}
+{sudo docker compose run app_name bundle exec rails db:migrate
+sudo docker compose run app_name bundle exec rails c}
 
 
 ```
-docker compose run citcom bundle
+docker compose run app_name bundle
 ```
 
 ## Debugging

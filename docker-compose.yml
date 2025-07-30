@@ -1,13 +1,11 @@
-#version: '3.8'
-
 services:
   db:
     image: postgres:15
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: shop_easy_bd_development
 
   web:

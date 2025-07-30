@@ -8,3 +8,37 @@ bn:
     sign_up: "নিবন্ধন"
     logout: "লগআউট"
     profile: "আমার প্রোফাইল"
+
+bn:
+  products:
+    index:
+      title: "সব পণ্য"
+      new_product: "নতুন পণ্য"
+      details: "বিস্তারিত"
+    show:
+      price: "মূল্য"
+      stock: "স্টক"
+      edit: "এডিট"
+      back: "ফিরে যান"
+      delete: "মুছে ফেলুন"
+    new:
+      title: "নতুন পণ্য যোগ করুন"
+      back: "ফিরে যান"
+    edit:
+      title: "পণ্য এডিট করুন"
+      back: "ফিরে যান"
+    form:
+      name_en: "নাম (ইংরেজি)"
+      name_bn: "নাম (বাংলা)"
+      description_en: "বর্ণনা (ইংরেজি)"
+      description_bn: "বর্ণনা (বাংলা)"
+      price: "মূল্য"
+      stock: "স্টক"
+      category: "বিভাগ"
+      select_category: "বিভাগ নির্বাচন করুন"
+      image: "ছবি"
+  messages:
+    product_created: "পণ্য সফলভাবে তৈরি হয়েছে"
+    product_updated: "পণ্য সফলভাবে আপডেট হয়েছে"
+    product_deleted: "পণ্য সফলভাবে মুছে ফেলা হয়েছে"
+    confirm_delete: "আপনি কি সত্যিই এই পণ্যটি মুছে ফেলতে চান?"

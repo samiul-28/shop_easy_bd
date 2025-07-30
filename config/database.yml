@@ -17,5 +17,6 @@ test:
 production:
   <<: *default
   database: shop_easy_bd_production
-  username: shop_easy_bd
-  password: <%= ENV['SHOP_EASY_BD_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV["DATABASE_HOST"] || "db" %>

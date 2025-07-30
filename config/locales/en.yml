@@ -38,3 +38,54 @@ en:
     sign_up: "Sign Up"
     logout: "Logout"
     profile: "My Profile"
+
+    
+categories:
+  index:
+    title: "All Categories"
+    new_category: "New Category"
+  show:
+    title: "Products in this Category"
+    back: "Back"
+  form:
+    name_en: "Name (English)"
+    name_bn: "Name (Bengali)"
+    parent: "Parent Category"
+    select_parent: "Select Parent Category"
+messages:
+  category_created: "Category created successfully"
+  category_updated: "Category updated successfully"
+  category_deleted: "Category deleted successfully"
+
+products:
+  index:
+    title: "All Products"
+    new_product: "New Product"
+    details: "Details"
+  show:
+    price: "Price"
+    stock: "Stock"
+    edit: "Edit"
+    back: "Back"
+    delete: "Delete"
+  new:
+    title: "Add New Product"
+    back: "Back"
+  edit:
+    title: "Edit Product"
+    back: "Back"
+  form:
+    name_en: "Name (English)"
+    name_bn: "Name (Bengali)"
+    description_en: "Description (English)"
+    description_bn: "Description (Bengali)"
+    price: "Price"
+    stock: "Stock"
+    category: "Category"
+    select_category: "Select Category"
+    image: "Image"
+messages:
+  product_created: "Product created successfully"
+  product_updated: "Product updated successfully"
+  product_deleted: "Product deleted successfully"
+  confirm_delete: "Are you sure you want to delete this product?"
