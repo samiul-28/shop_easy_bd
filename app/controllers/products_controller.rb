@@ -23,10 +23,12 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    authorize @product
   end
 
   def create
     @product = Product.new(product_params)
+    authorize @product
     if @product.save
       redirect_to @product, notice: t('messages.product_created')
     else
@@ -34,9 +36,12 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @product
+  end
 
   def update
+    authorize @product
     if @product.update(product_params)
       redirect_to @product, notice: t('messages.product_updated')
     else
@@ -45,6 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    authorize @product
     @product.destroy
     redirect_to products_path, notice: t('messages.product_deleted')
   end

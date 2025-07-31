@@ -22,7 +22,9 @@
           <%= link_to t('navbar.cart'), "#", class: "nav-link" %> <!-- Replace # with cart_path if you build cart -->
         </li>
         <li class="nav-item">          
-          <%= link_to t('products.index.new_product'), new_product_path, class: "btn btn-primary" %>
+          <% if policy(Product).new? %>
+            <%= link_to t('products.index.new_product'), new_product_path, class: "btn btn-primary" %>
+          <% end %>       
         </li>
       </ul>
       <%= form_with url: products_path, method: :get, local: true, class: "d-flex mx-auto", role: "search" do %>

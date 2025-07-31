@@ -9,7 +9,17 @@
 <p><%= I18n.locale == :bn ? @product.description_bn : @product.description_en %></p>
 
 <div class="mt-3">
-  <%= link_to t('products.show.edit'), edit_product_path(@product), class: "btn btn-warning" %>
+  <% if policy(@product).edit? %>
+    <%= link_to t('products.show.edit'), edit_product_path(@product), class: "btn btn-warning" %>
+  <% end %>
+
   <%= link_to t('products.show.back'), products_path, class: "btn btn-secondary" %>
-  <%= link_to t('products.show.delete'), product_path(@product), method: :delete, data: { confirm: t('messages.confirm_delete') }, class: "btn btn-danger" %>
+
+  <% if policy(@product).destroy? %>
+    <%= button_to t('products.show.delete'), product_path(@product),
+        method: :delete,
+        data: { confirm: t('messages.confirm_delete') },
+        class: "btn btn-danger" %>
+  <% end %>
 </div>
+

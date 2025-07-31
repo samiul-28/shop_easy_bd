@@ -13,12 +13,10 @@
           onchange: "this.form.submit();" # JavaScript to auto-submit the form on change
         %>
       </div>
-      <% # The submit button has been removed as the form submits automatically %>
     </div>
   <% end %>
 </div>
 
-<!-- Product list display -->
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-3 mb-4">
