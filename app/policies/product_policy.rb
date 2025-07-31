@@ -1,5 +1,4 @@
 class ProductPolicy < ApplicationPolicy
-  # Everyone can view index and show
   def index?
     true
   end
@@ -8,7 +7,6 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
-  # Only admins can manage
   def create?
     user.present? && user.admin?
   end
