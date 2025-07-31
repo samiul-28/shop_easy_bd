@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <%= link_to "ShopEasyBD", root_path, class: "navbar-brand" %>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -19,46 +19,66 @@
           <%= link_to t('navbar.categories'), categories_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to t('navbar.cart'), "#", class: "nav-link" %> <!-- Replace # with cart_path if you build cart -->
+          <%= link_to t('navbar.cart'), "#", class: "nav-link" %> <!-- Replace # with cart_path if you add cart -->
         </li>
-        <li class="nav-item">          
-          <% if policy(Product).new? %>
-            <%= link_to t('products.index.new_product'), new_product_path, class: "btn btn-primary" %>
-          <% end %>       
-        </li>
+
+        <% if policy(Product).new? %>
+          <li class="nav-item">
+            <%= link_to t('products.index.new_product'), new_product_path, class: "btn btn-primary ms-2" %>
+          </li>
+        <% end %>
+        
       </ul>
       <%= form_with url: products_path, method: :get, local: true, class: "d-flex mx-auto", role: "search" do %>
         <%= text_field_tag :q, params[:q], class: "form-control me-2", placeholder: "Search products..." %>
-      
       <% end %>
 
       <ul class="navbar-nav mb-2 mb-lg-0">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to t('navbar.profile'), edit_user_registration_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= button_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i> <span class="fw-bold"><%= current_user.email %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <%= link_to raw('<i class="bi bi-gear me-1"></i> Profile Settings'), edit_user_registration_path, class: "dropdown-item" %>
+              </li>
+
+              <% if current_user.admin? %>
+                <li>
+                  <%= link_to raw('<i class="bi bi-speedometer2 me-1"></i> Admin Panel'), class: "dropdown-item" %>
+                </li>
+              <% end %>
+
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <%= button_to raw('<i class="bi bi-box-arrow-right me-1"></i> Logout'), destroy_user_session_path, method: :delete, form: { class: 'd-inline' }, class: "dropdown-item" %>
+              </li>
+            </ul>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to t('navbar.sign_in'), new_user_session_path, class: "nav-link" %>
+            <%= link_to raw('<i class="bi bi-box-arrow-in-right me-1"></i> ' + t('navbar.sign_in')), new_user_session_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to t('navbar.sign_up'), new_user_registration_path, class: "nav-link" %>
+            <%= link_to raw('<i class="bi bi-person-plus me-1"></i> ' + t('navbar.sign_up')), new_user_registration_path, class: "nav-link" %>
           </li>
         <% end %>
 
-        <!-- Language switcher -->
-        <li class="nav-item">
-          <%= link_to "en", url_for(locale: 'en'), class: "nav-link" %>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-translate me-1"></i> <%= I18n.locale == :bn ? "বাংলা" : "English" %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              <li>
+                <%= link_to "English", url_for(locale: 'en'), class: "dropdown-item" %>
+              </li>
+              <li>
+                <%= link_to "বাংলা", url_for(locale: 'bn'), class: "dropdown-item" %>
+              </li>
+            </ul>
         </li>
-        <li class="nav-item">
-          <%= link_to "বাংলা", url_for(locale: 'bn'), class: "nav-link" %>
-        </li>
-      </ul>
+      </ul>    
     </div>
   </div>
 </nav>
-
-
