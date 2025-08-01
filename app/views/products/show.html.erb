@@ -54,6 +54,13 @@
             <strong><%= review.user.email %></strong> rated:
             <%= '★' * review.rating + '☆' * (5 - review.rating) %> (<%= review.rating %>/5)
             <p class="mb-1"><%= review.comment %></p>
+              <% if review.images.attached? %>
+                <div class="mb-2">
+                  <% review.images.each do |image| %>
+                    <%= image_tag image, class: "img-thumbnail", style: "max-width: 100px; max-height: 100px;" %>
+                  <% end %>
+                </div>
+              <% end %>
 
             <% if policy(review).destroy? %>
               <%= button_to 'Delete', product_review_path(@product, review),
@@ -64,6 +71,7 @@
           </div>
         <% end %>
       <% end %>
+      
 
       <% if user_signed_in? %>
         <h4 class="mt-4">Leave a review</h4>
