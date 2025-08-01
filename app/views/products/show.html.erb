@@ -1,31 +1,76 @@
-<h1><%= I18n.locale == :bn ? @product.name_bn : @product.name_en %></h1>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8"> <!-- adjust col size as needed -->
+      <h1 class="text-center mb-3">
+        <%= I18n.locale == :bn ? @product.name_bn : @product.name_en %>
+      </h1>
 
-<% if @product.image.attached? %>
-  <%= image_tag @product.image, class: "img-fluid mb-3" %>
-<% end %>
+      <% if @product.image.attached? %>
+        <div class="text-center mb-3">
+          <%= image_tag @product.image, class: "img-fluid" %>
+        </div>
+      <% end %>
 
-<p><strong><%= t('products.show.price') %>:</strong> ৳ <%= @product.price %></p>
-<p><strong><%= t('products.show.stock') %>:</strong> <%= @product.stock %></p>
-<p><%= I18n.locale == :bn ? @product.description_bn : @product.description_en %></p>
+      <p><strong><%= t('products.show.price') %>:</strong> ৳ <%= @product.price %></p>
+      <p><strong><%= t('products.show.stock') %>:</strong> <%= @product.stock %></p>
+      <p><%= I18n.locale == :bn ? @product.description_bn : @product.description_en %></p>
 
-<div class="mt-3">
-  <%# Add to cart button (visible to all signed-in users) %>
-  <%= button_to 'Add to cart',
-      cart_items_path(product_id: @product.id),
-      method: :post,
-      class: "btn btn-success mb-2" %>
+      <% if @product.reviews.any? %>
+        <p>
+          <strong>Average rating:</strong>
+          <%= number_with_precision(@product.reviews.average(:rating), precision: 1) %> / 5
+        </p>
+      <% else %>
+        <p>No reviews yet.</p>
+      <% end %>
 
-  <%# Edit & Delete buttons (only for admin or authorized users) %>
-  <% if policy(@product).edit? %>
-    <%= link_to t('products.show.edit'), edit_product_path(@product), class: "btn btn-warning mb-2" %>
-  <% end %>
+      <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
+        <%= button_to 'Add to cart',
+            cart_items_path(product_id: @product.id),
+            method: :post,
+            class: "btn btn-success" %>
 
-  <% if policy(@product).destroy? %>
-    <%= button_to t('products.show.delete'), product_path(@product),
-        method: :delete,
-        data: { confirm: t('messages.confirm_delete') },
-        class: "btn btn-danger mb-2" %>
-  <% end %>
+        <% if policy(@product).edit? %>
+          <%= link_to t('products.show.edit'), edit_product_path(@product), class: "btn btn-warning" %>
+        <% end %>
 
-  <%= link_to t('products.show.back'), products_path, class: "btn btn-secondary mb-2" %>
+        <% if policy(@product).destroy? %>
+          <%= button_to t('products.show.delete'), product_path(@product),
+              method: :delete,
+              data: { confirm: t('messages.confirm_delete') },
+              class: "btn btn-danger" %>
+        <% end %>
+
+        <%= link_to t('products.show.back'), products_path, class: "btn btn-secondary" %>
+      </div>
+
+      <hr>
+
+      <h3>Reviews (<%= @product.reviews.count %>)</h3>
+
+      <% if @product.reviews.any? %>
+        <% @product.reviews.each do |review| %>
+          <div class="mb-2 p-2 border rounded">
+            <strong><%= review.user.email %></strong> rated:
+            <%= '★' * review.rating + '☆' * (5 - review.rating) %> (<%= review.rating %>/5)
+            <p class="mb-1"><%= review.comment %></p>
+
+            <% if policy(review).destroy? %>
+              <%= button_to 'Delete', product_review_path(@product, review),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: "btn btn-sm btn-danger" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <h4 class="mt-4">Leave a review</h4>
+        <%= render 'reviews/form', product: @product %>
+      <% else %>
+        <p>Please <%= link_to 'sign in', new_user_session_path %> to add a review.</p>
+      <% end %>
+    </div>
+  </div>
 </div>

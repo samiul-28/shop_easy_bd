@@ -1,0 +1,12 @@
+<%= form_with(model: [ @product, @product.reviews.build ], local: true) do |f| %>
+    <div class="mb-2">
+      <%= f.label :rating, 'Your rating (1–5 stars)' %>
+      <%= f.number_field :rating, in: 1..5, class: "form-control" %>
+    </div>
+    <div class="mb-2">
+      <%= f.label :comment %>
+      <%= f.text_area :comment, class: "form-control" %>
+    </div>
+    <%= f.submit 'Submit Review', class: "btn btn-primary" %>
+<% end %>
+  

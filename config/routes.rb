@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
-  resources :products
+  resources :products do
+    resources :reviews, only: [:create, :edit, :update, :destroy]
+  end
   resources :categories
   devise_for :users
 
