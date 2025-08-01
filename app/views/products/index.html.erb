@@ -20,7 +20,6 @@
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-3 mb-4">
-      <% # Wrap the entire card in an anchor tag to make the whole card clickable %>
       <%= link_to product_path(product), class: "card h-100 text-decoration-none text-dark" do %>
         <% if product.image.attached? %>
           <%= image_tag product.image, class: "card-img-top", style: "height:200px; object-fit:cover;" %>
@@ -30,10 +29,12 @@
             <%= I18n.locale == :bn ? product.name_bn : product.name_en %>
           </h5>
           <p class="card-text">৳ <%= product.price %></p>
-          <% # The individual 'Details' button is no longer needed since the entire card is a link %>
         </div>
       <% end %>
+
+      <%= button_to 'Add to cart', cart_items_path(product_id: product.id), method: :post, class: "btn btn-sm btn-success mt-2 w-100" %>
     </div>
+
   <% end %>
 </div>
 

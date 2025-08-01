@@ -18,9 +18,16 @@
         <li class="nav-item">
           <%= link_to t('navbar.categories'), categories_path, class: "nav-link" %>
         </li>
+        <% if user_signed_in? && current_user.admin? %>
         <li class="nav-item">
-          <%= link_to t('navbar.cart'), "#", class: "nav-link" %> <!-- Replace # with cart_path if you add cart -->
+          <%= link_to raw('<i class="bi bi-card-list me-1"></i> All Orders'), orders_path, class: "nav-link" %>
         </li>
+        <% elsif user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to raw('<i class="bi bi-cart me-1"></i> My Cart'), cart_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      
 
         <% if policy(Product).new? %>
           <li class="nav-item">

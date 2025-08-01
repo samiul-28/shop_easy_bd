@@ -1,0 +1,32 @@
+<h1>Orders</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if current_user.admin? %>
+        <th>User</th>
+      <% end %>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Ordered at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <% if current_user.admin? %>
+          <td><%= order.user.email %></td>
+        <% end %>
+        <td>৳ <%= order.total_price %></td>
+        <td>
+          <span class="badge bg-secondary"><%= order.status.capitalize %></span>
+        </td>
+        <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td>
+          <%= link_to "View", order_path(order), class: "btn btn-sm btn-outline-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

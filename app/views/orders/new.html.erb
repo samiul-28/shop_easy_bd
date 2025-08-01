@@ -1,0 +1,12 @@
+<h1>Checkout</h1>
+
+<p>Total: ৳ <%= @cart.cart_items.sum { |i| i.product.price * i.quantity } %></p>
+
+<%= form_with(model: @order, local: true) do |f| %>
+  <div class="mb-3">
+    <%= f.label :payment_method %><br>
+    <%= f.radio_button :payment_method, 'COD', checked: true %> Cash on Delivery
+  </div>
+  <%= f.submit 'Confirm Order', class: "btn btn-primary" %>
+<% end %>
+
