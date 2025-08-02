@@ -1,0 +1,41 @@
+<footer class="bg-light text-center text-lg-start mt-4 border-top">
+  <div class="container p-4">
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-start">
+        <h5 class="fw-bold text-primary mb-2">
+          <i class="bi bi-shop-window me-1"></i> EasyShop
+        </h5>
+        <p class="small text-muted">
+          Your trusted online store for quality products and fast delivery. Shop easy, shop smart.
+        </p>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-start">
+        <h5 class="fw-bold mb-2">Contact Us</h5>
+        <p class="mb-1 small text-muted">📍 123 Thakurgaon sadar(5200), Thakurgaon, Bangladesh</p>
+        <p class="mb-1 small text-muted">📞 +880-10000008</p>
+        <p class="mb-1 small text-muted">✉️ info@easyshop.com</p>
+      </div>
+
+      <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-start">
+        <h5 class="fw-bold mb-2">Quick Links</h5>
+        <ul class="list-unstyled mb-0">
+          <li><%= link_to 'Home', root_path, class: 'text-decoration-none text-muted small' %></li>
+          <li><%= link_to 'Products', products_path, class: 'text-decoration-none text-muted small' %></li>
+          <li><%= link_to 'Categories', categories_path, class: 'text-decoration-none text-muted small' %></li>
+          <% if user_signed_in? && current_user.admin? %>
+            <li><%= link_to 'All Orders', orders_path, class: 'text-decoration-none text-muted small' %></li>
+          <% elsif user_signed_in? %>
+            <li><%= link_to 'My Cart', cart_path, class: 'text-decoration-none text-muted small' %></li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bg-primary text-white text-center p-2 small">
+    &copy; <%= Time.now.year %> EasyShop. All rights reserved.
+  </div>
+</footer>
