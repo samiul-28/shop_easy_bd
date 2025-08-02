@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top: 0; width: 100%; z-index: 1030;">
   <div class="container-fluid">
-    <%= link_to "ShopEasyBD", root_path, class: "navbar-brand" %>
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+        <i class="bi bi-bag-fill me-2"></i>
+        <span class="fw-bold">EasyShop</span>
+      <% end %>
+  
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

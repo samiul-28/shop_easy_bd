@@ -1,0 +1,16 @@
+<% flash.each do |type, message| %>
+    <% bs_class, icon = case type.to_sym
+      when :notice   then ['alert-success', 'bi bi-check-circle-fill']
+      when :alert    then ['alert-danger', 'bi bi-exclamation-triangle-fill']
+      when :error    then ['alert-danger', 'bi bi-x-circle-fill']
+      when :warning  then ['alert-warning', 'bi bi-exclamation-diamond-fill']
+      else ['alert-info', 'bi bi-info-circle-fill']
+    end %>
+    <div class="alert <%= bs_class %> alert-dismissible fade show mt-2 auto-dismiss" role="alert">
+      <i class="<%= icon %> me-1"></i> <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% end %>
+
+  
+  
